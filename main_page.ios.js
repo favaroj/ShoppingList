@@ -19,27 +19,54 @@ var ListPortal = require('./list_portal.ios');
 
 class MainPage extends Component {
 
+	constructor(props) {
+    super(props);
+    this.state = {
+			name: '',
+		 	id: 'Main'};
+  }
+
 	onCreatePortalPress() {
 		this.props.navigator.push({
-			title: 'Create Portal',
-			component: CreatePortal,
+			id: 'CreatePortal'
 		});
 	}
 
-	onListPortalPress() {
+	onListPortalPress(event) {
+
+
+
 		this.props.navigator.push({
-			title: 'List Portal',
-			component: ListPortal,
+			id: 'ListPortal',
+			passProps: {
+				name: this.state.name
+			}
 		});
+
+		//alert('Welcome ' + this.state.name + '!');
+	}
+
+	componentDidMount() {
+		let Name = this.props.name;
+		/*
+		this.setState({
+			dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
+		})
+		*/
+
+		this.setState({
+			name: Name
+		})
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
 				<Image source={require('./Resources/shoppingCart-image.png')} style={styles.image}/>
+				<Text>{this.props.name}'s Portal</Text>
 				<View style={styles.flowRight}>
 					<TouchableHighlight style={styles.button}
-							underlayColor='#99d9f4' onPress={ () => this.onListPortalPress() }>
+							underlayColor='#99d9f4' onPress={ this.onListPortalPress.bind(this) }>
 						<Text style={styles.buttonText}>Enter List Portal</Text>
 					</TouchableHighlight>
 				</View>

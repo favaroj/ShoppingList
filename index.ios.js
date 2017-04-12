@@ -1,21 +1,21 @@
 'use strict';
 
+//import React, { Component } from 'react';
+import { Text, TouchableHighlight } from 'react-native';
 var React = require('react');
 var ReactNative = require('react-native');
 var MainPage = require('./main_page.ios');
-
+var CreatePortal = require('./create_portal.ios');
+var ListPortal = require('./list_portal.ios');
+var Navigation = require('./Navigator');
 
 class ShoppingListApp extends React.Component {
   render() {
+
     return (
-      <ReactNative.NavigatorIOS
-        style={{ flex:1 }}
-        initialRoute={{
-          title: 'Main Menu',
-          component: MainPage,
-        }}/>
+			<Navigation></Navigation>
     );
-  }
+  }//End renderScene
 }
 
 var styles = ReactNative.StyleSheet.create({

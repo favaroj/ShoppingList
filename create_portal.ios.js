@@ -10,42 +10,66 @@ import {
 	Navigator,
 	TouchableHighlight,
 	Image,
-	TextInput
+	TextInput,
+	AsyncStorage
 } from 'react-native';
+
+var ListPortal = require('./list_portal.ios');
+var MainMenu = require('./main_page.ios');
+
 
 
 class CreatePortal extends Component {
 
-	_navigate(name) {
-		this.props.navigator.push({
-			name: 'Main',
-			passProps: {
-				name: name
-			}
-		});
+
+
+	constructor(props) {
+    super(props);
+    this.state = {
+			name: '',
+		 	id: 'CreatePortal'};
+  }
+
+	onNameTextChanged(event) {
+  	console.log('onNameTextChanged');
+  	this.setState({ name: event.nativeEvent.text });
+  	console.log(this.state.name);
 	}
 
-	_navigate2(name) {
+	welcomeMessage() {
+		console.log('Welcome ' + this.state.name);
+		alert('Welcome ' + this.state.name + '!');
+	}
+
+	onListPortalPress(event) {
+		let name = this.state.name;
 		this.props.navigator.push({
-			name: 'ListPortal',
+			id: 'ListPortal',
 			passProps: {
 				name: name
 			}
 		});
+		//alert('Welcome ' + this.state.name + '!');
 	}
-	/*
-	constructor(props) {
-  	super(props);
-  	this.state = {
-    	searchString: 'Bob'
-  	};
-	},
-	onSearchTextChanged(event) {
-  	console.log('onSearchTextChanged');
-  	this.setState({ searchString: event.nativeEvent.text });
-  	console.log(this.state.searchString);
-	},
-	*/
+
+	getName() {
+		let portalName = this.state.name;
+		return portalName;
+	}
+
+	onMainMenuPress(event) {
+
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'Main',
+			passProps: {
+				name: name
+			}
+		});
+
+		//alert('Welcome ' + this.state.name + '!');
+	}
+	/*onChangeText={(text) => this.setState({name})}*/
 	render() {
 		console.log('CreatePortal.render');
 		return (
@@ -54,18 +78,19 @@ class CreatePortal extends Component {
 					<View style={styles.flowRight}>
 						<TextInput
 							style={styles.searchInput}
-							placeholder='Enter Portal Name'/>
+							placeholder='Enter Portal Name'
+							onChange={this.onNameTextChanged.bind(this)}
+							value={this.state.name}
+						/>
 					</View>
 					<View style={styles.container1}>
 						<TouchableHighlight style={styles.button}
-								underlayColor='#99d9f4' onPress={ () => this._navigate2('List Portal') }>
+								underlayColor='#99d9f4' onPress={this.onListPortalPress.bind(this)}>
 							<Text style={styles.buttonText}>Create</Text>
 						</TouchableHighlight>
-					</View>
-					<View style={styles.container1}>
 						<TouchableHighlight style={styles.button}
-								underlayColor='#99d9f4' onPress={ () => this._navigate('Main') }>
-							<Text style={styles.buttonText}>Return To Main Menu</Text>
+								underlayColor='#99d9f4' onPress={this.onMainMenuPress.bind(this)}>
+							<Text style={styles.buttonText}>Main</Text>
 						</TouchableHighlight>
 					</View>
 				<Text style={styles.description}>First Time Setup:</Text>
@@ -85,8 +110,8 @@ var styles = StyleSheet.create({
 		color: '#656565'
 	},
 	header: {
-		marginTop: 10,
-		marginBottom: 60,
+		marginTop: 50,
+		marginBottom: 40,
 		fontSize: 30,
 		textAlign: 'center',
 		color: '#656565'
@@ -105,7 +130,7 @@ var styles = StyleSheet.create({
 	container2: {
 		padding: 30,
 		marginTop: 20,
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	flowRight: {
   	flexDirection: 'row',
@@ -148,4 +173,5 @@ var styles = StyleSheet.create({
 	}
 });
 
+//export{portalName};
 module.exports = CreatePortal;
