@@ -1,15 +1,20 @@
 'use strict';
 
-//import * as firebase from 'firebase';
+import * as firebase from 'firebase';
 const StatusBar = require('./components/StatusBar');
 const ActionButton = require('./components/ActionButton');
 const ListItem = require('./components/ListItem');
 const styles1 = require('./styles.js');
 var CreatePortal = require('./create_portal.ios');
 var MainMenu = require('./main_page.ios');
-var WalmartList = require('./WalmartList');
+var Produce = require('./Produce');
+//import {firebase} from './list_portal.ios';
+//import FirebaseConfig from './firebase_config';
+//var firebaseConfig = require('./firebase_config');
 
-//destructuring assignment- call StyleSheet instead of ReactNative.StyleSheet
+import FirebaseConfig from './firebase_config';
+
+//destructuring assignment- e.g. call StyleSheet instead of ReactNative.StyleSheet
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -24,24 +29,9 @@ import {
 	AlertIOS
 } from 'react-native';
 
-var firebase = require('firebase');
-/*
-const firebaseConfig = {
-	apiKey: "AIzaSyAGwqziE1aB7oxkAeGAT8EIxRUol6O_fO0",
-  authDomain: "shoppinglist-c4690.firebaseapp.com",
-  databaseURL: "https://shoppinglist-c4690.firebaseio.com",
-  projectId: "shoppinglist-c4690",
-  storageBucket: "shoppinglist-c4690.appspot.com",
-  messagingSenderId: "665003354084"
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-//Get Reference to database
-var rootRef = firebase.database();
-*/
 
 
-class ListPortal extends Component {
+class ProduceList extends Component {
 
 	constructor(props) {
   	super(props);
@@ -55,14 +45,15 @@ class ListPortal extends Component {
 		*/
 
 		this.state = {
-    	//dataSource: new ListView.DataSource({
-      	//rowHasChanged: (row1, row2) => row1 !== row2,
+    	dataSource: new ListView.DataSource({
+      	rowHasChanged: (row1, row2) => row1 !== row2,
 				name: '',
-				id: 'ListPortal'
-    	//})
+				id: 'Produce',
+    	})
   	};
-		//this.itemsRef = firebaseApp.database().ref();
-		//this.itemsRef = firebaseApp.database().ref('Lists/Walmart/Dairy');
+		//this.itemsRef = firebaseWalmart.database().ref();
+		let produceRef = 'Lists/Walmart/Produce';
+		this.itemsRef = FirebaseConfig.database().ref(produceRef);
 	}
 
 	componentDidMount() {
@@ -72,12 +63,12 @@ class ListPortal extends Component {
       dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
     })
 		*/
-		//this.listenForItems(this.itemsRef);
+		this.listenForItems(this.itemsRef);
 		this.setState({
 			name: Name
 		})
   }
-	/*
+
 	listenForItems(itemsRef) {
     itemsRef.on('value', (snap) => {
 
@@ -129,16 +120,6 @@ class ListPortal extends Component {
       <ListItem item={item} onPress={onPress} />
     );
 	}
-	*/
-	onWalmartPress(event) {
-		let name = this.state.name;
-		this.props.navigator.push({
-			id: 'WalmartList',
-			passProps: {
-				name: name
-			}
-		});
-	}
 
 	onMainMenuPress(event) {
 		let name = this.state.name;
@@ -151,6 +132,8 @@ class ListPortal extends Component {
 		//alert('Welcome ' + this.state.name + '!');
 	}
 
+
+
 	//Change first <View back to {styles.container2}
 	render() {
 		console.log('CreatePortal.render');
@@ -158,12 +141,12 @@ class ListPortal extends Component {
 			<View style={styles1.container}>
 
 				<View style={styles.container}>
-					<Text style={styles.header}>{this.props.name}'s Portal</Text>
+					<Text style={styles.header}>Produce</Text>
 				</View>
 				<View>
 					<View style={styles.container1}>
 						<TouchableHighlight style={styles.button}
-								underlayColor='#99d9f4' onPress={this.onWalmartPress.bind(this)}>
+								underlayColor='#99d9f4' onPress={this._onProducePress.bind(this)}>
 							<Text style={styles.buttonText}>Walmart</Text>
 						</TouchableHighlight>
 					</View>
@@ -173,7 +156,7 @@ class ListPortal extends Component {
 		)
 	}
 	//<ActionButton title="Add" onPress={this._addItem.bind(this)} />
-//
+	//
 }
 
 var styles = StyleSheet.create({
@@ -218,13 +201,13 @@ var styles = StyleSheet.create({
   	alignSelf: 'stretch'
 	},
 	buttonText: {
-  	fontSize: 20,
+  	fontSize: 12,
   	color: 'white',
   	alignSelf: 'center'
 	},
 	button: {
   	height: 25,
-		width: 200,
+		width: 80,
 
   	flexDirection: 'row',
   	backgroundColor: '#48BBEC',
@@ -256,5 +239,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = ListPortal;
-export {firebase};
+module.exports = ProduceList;

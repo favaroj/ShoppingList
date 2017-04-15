@@ -10,6 +10,8 @@ import
 var Main = require('./main_page.ios');
 var CreatePortal = require('./create_portal.ios');
 var ListPortal = require('./list_portal.ios');
+var WalmartList = require('./WalmartList');
+var Produce = require('./Produce');
 
 class AppNavigator extends React.Component{
   constructor(props) {
@@ -34,7 +36,11 @@ class AppNavigator extends React.Component{
 				return (<CreatePortal navigator={navigator} {...route.passProps} route={route} title="Create Portal"/>);
 			case 'ListPortal':
 				return (<ListPortal navigator={navigator} {...route.passProps} route={route} title="List Portal"/>);
-    }
+			case 'WalmartList':
+				return (<WalmartList navigator={navigator} {...route.passProps} route={route} title="Walmart List"/>);
+			case 'Produce':
+				return (<Produce navigator={navigator} {...route.passProps} route={route} title='Produce'/>);
+		}
   }
 }
 

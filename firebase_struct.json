@@ -1,0 +1,24 @@
+{
+  "Lists": {
+    "Walmart": {
+      "Dairy": {
+				"Item": "Milk"
+			},
+			"Produce": {
+				"Lettuce": "1"
+			},
+			"Meat": {
+				"Steak": "1"
+			},
+			"Misc Food": {
+				"Granola": "1"
+			},
+			"Non Food": {
+				"Batteries": "1"
+			},
+			"Canned": {
+				"Corn": "1"
+			}
+    }
+  }
+}
