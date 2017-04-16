@@ -8,9 +8,7 @@ const styles1 = require('./styles.js');
 var CreatePortal = require('./create_portal.ios');
 var MainMenu = require('./main_page.ios');
 var Produce = require('./Produce');
-//import {firebase} from './list_portal.ios';
-//import FirebaseConfig from './firebase_config';
-//var firebaseConfig = require('./firebase_config');
+var WalmartList = require('./WalmartList');
 
 import FirebaseConfig from './firebase_config';
 
@@ -53,7 +51,7 @@ class ProduceList extends Component {
   	};
 		//this.itemsRef = firebaseWalmart.database().ref();
 		let produceRef = 'Lists/Walmart/Produce';
-		this.itemsRef = FirebaseConfig.database().ref(produceRef);
+		this.itemsRef = firebase.database().ref(produceRef);
 	}
 
 	componentDidMount() {
@@ -90,7 +88,7 @@ class ProduceList extends Component {
 
 	_addItem() {
     AlertIOS.prompt(
-      'Create New List',
+      'Add New Item',
       null,
       [
         {
@@ -121,10 +119,10 @@ class ProduceList extends Component {
     );
 	}
 
-	onMainMenuPress(event) {
+	onWalmartMainPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
-			id: 'Main',
+			id: 'WalmartList',
 			passProps: {
 				name: name
 			}
@@ -142,13 +140,22 @@ class ProduceList extends Component {
 
 				<View style={styles.container}>
 					<Text style={styles.header}>Produce</Text>
+						<TouchableHighlight style={styles.button}
+								underlayColor='#99d9f4' onPress={this._addItem.bind(this)}>
+							<Text style={styles.buttonText}>Add Item</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button1}
+								underlayColor='#99d9f4' onPress={this.onWalmartMainPress.bind(this)}>
+							<Text style={styles.buttonText}>Return to Walmart</Text>
+						</TouchableHighlight>
 				</View>
 				<View>
-					<View style={styles.container1}>
-						<TouchableHighlight style={styles.button}
-								underlayColor='#99d9f4' onPress={this._onProducePress.bind(this)}>
-							<Text style={styles.buttonText}>Walmart</Text>
-						</TouchableHighlight>
+					<View>
+						<ListView
+          		dataSource={this.state.dataSource}
+          		renderRow={this._renderItem.bind(this)}
+          		enableEmptySections={true}
+          		/>
 					</View>
 
 				</View>
@@ -208,6 +215,19 @@ var styles = StyleSheet.create({
 	button: {
   	height: 25,
 		width: 80,
+
+  	flexDirection: 'row',
+  	backgroundColor: '#48BBEC',
+  	borderColor: '#48BBEC',
+  	borderWidth: 1,
+  	borderRadius: 8,
+  	marginBottom: 1,
+		marginTop: 10,
+		justifyContent: 'center'
+	},
+	button1: {
+  	height: 25,
+		width: 200,
 
   	flexDirection: 'row',
   	backgroundColor: '#48BBEC',

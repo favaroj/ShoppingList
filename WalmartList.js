@@ -7,7 +7,7 @@ const ListItem = require('./components/ListItem');
 const styles1 = require('./styles.js');
 var CreatePortal = require('./create_portal.ios');
 var MainMenu = require('./main_page.ios');
-var Produce = require('./Produce');
+//var Produce = require('./Produce');
 //import {firebase} from './list_portal.ios';
 //var firebaseConfig = require('./firebase_config');
 
@@ -153,7 +153,7 @@ class WalmartList extends Component {
 				<View>
 					<View style={styles.container1}>
 						<TouchableHighlight style={styles.button}
-								underlayColor='#99d9f4' onPress={this._addItem.bind(this)}>
+								underlayColor='#99d9f4' onPress={this.onProducePress.bind(this)}>
 							<Text style={styles.buttonText}>Produce</Text>
 						</TouchableHighlight>
 					</View>
