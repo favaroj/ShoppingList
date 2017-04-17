@@ -120,10 +120,10 @@ class WalmartList extends Component {
     );
 	}
 	*/
-	onMainMenuPress(event) {
+	onListPortalPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
-			id: 'Main',
+			id: 'ListPortal',
 			passProps: {
 				name: name
 			}
@@ -149,10 +149,14 @@ class WalmartList extends Component {
 
 				<View style={styles.container}>
 					<Text style={styles.header}>Walmart</Text>
+						<TouchableHighlight style={styles.button}
+								underlayColor='#99d9f4' onPress={this.onListPortalPress.bind(this)}>
+							<Text style={styles.buttonText1}>Return To Portal</Text>
+						</TouchableHighlight>
 				</View>
 				<View>
 					<View style={styles.container1}>
-						<TouchableHighlight style={styles.button}
+						<TouchableHighlight style={styles.button1}
 								underlayColor='#99d9f4' onPress={this.onProducePress.bind(this)}>
 							<Text style={styles.buttonText}>Produce</Text>
 						</TouchableHighlight>
@@ -208,13 +212,31 @@ var styles = StyleSheet.create({
   	alignSelf: 'stretch'
 	},
 	buttonText: {
+  	fontSize: 20,
+  	color: 'white',
+  	alignSelf: 'center'
+	},
+	buttonText1: {
   	fontSize: 12,
   	color: 'white',
   	alignSelf: 'center'
 	},
 	button: {
   	height: 25,
-		width: 80,
+		width: 100,
+
+  	flexDirection: 'row',
+  	backgroundColor: '#48BBEC',
+  	borderColor: '#48BBEC',
+  	borderWidth: 1,
+  	borderRadius: 8,
+  	marginBottom: 1,
+		marginTop: 10,
+		justifyContent: 'center'
+	},
+	button1: {
+  	height: 25,
+		width: 200,
 
   	flexDirection: 'row',
   	backgroundColor: '#48BBEC',
