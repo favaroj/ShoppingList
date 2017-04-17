@@ -34,6 +34,7 @@ class ProduceList extends Component {
 	constructor(props) {
   	super(props);
 
+		//FirebaseConfig.initialize();
 		/*
 		firebase.database().ref('Lists/Walmart/Dairy').update({
 			var name = 'Sour Cream';

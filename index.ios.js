@@ -8,8 +8,14 @@ var MainPage = require('./main_page.ios');
 var CreatePortal = require('./create_portal.ios');
 var ListPortal = require('./list_portal.ios');
 var Navigation = require('./Navigator');
+import FirebaseConfig from './firebase_config';
 
 class ShoppingListApp extends React.Component {
+	constructor(props) {
+		super(props);
+		FirebaseConfig.initialize();
+	}
+
   render() {
 
     return (

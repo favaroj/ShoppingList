@@ -34,7 +34,7 @@ class WalmartList extends Component {
 	constructor(props) {
   	super(props);
 
-		FirebaseConfig.initialize();
+		//FirebaseConfig.initialize();
 		/*
 		firebase.database().ref('Lists/Walmart/Dairy').update({
 			var name = 'Sour Cream';
@@ -51,8 +51,8 @@ class WalmartList extends Component {
     	})
   	};
 		//this.itemsRef = firebaseWalmart.database().ref();
-		let dairyPath = 'Lists/Walmart/Dairy'
-		this.itemsRef = firebase.database().ref(dairyPath);
+		//let dairyPath = 'Lists/Walmart/Dairy'
+		//this.itemsRef = firebase.database().ref(dairyPath);
 	}
 
 	componentDidMount() {
@@ -62,12 +62,12 @@ class WalmartList extends Component {
       dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
     })
 		*/
-		this.listenForItems(this.itemsRef);
+		//this.listenForItems(this.itemsRef);
 		this.setState({
 			name: Name
 		})
   }
-
+	/*
 	listenForItems(itemsRef) {
     itemsRef.on('value', (snap) => {
 
@@ -119,7 +119,7 @@ class WalmartList extends Component {
       <ListItem item={item} onPress={onPress} />
     );
 	}
-
+	*/
 	onMainMenuPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
