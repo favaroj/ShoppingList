@@ -4,7 +4,6 @@
       "Dairy": {
 				"Item": "Milk"
 			},
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
 			"Produce": {
 				"Lettuce": "1"
 			},
@@ -19,25 +18,6 @@
 			},
 			"Canned": {
 				"Corn": "1"
-=======
-			"Meat": {
-				"Item": "Steak"
-			},
-			"Misc Food": {
-				"Item": "Rice"
-			},
-			"Non Food": {
-				"Item": "Bleach"
-			},
-			"Canned": {
-				"Item": "Corn"
-			},
-			"Produce": {
-				"Item": "Lettuce"
-			},
-			"Other": {
-				"Item": "Lettuce"
->>>>>>> Fixed Android firebase functionality
 			}
     }
   }

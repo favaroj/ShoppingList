@@ -63,11 +63,7 @@ class MainPage extends Component {
 		return (
 			<View style={styles.container}>
 				<Image source={require('./Resources/shoppingCart-image.png')} style={styles.image}/>
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
 				<Text>{this.props.name}'s Portal</Text>
-=======
-				
->>>>>>> Fixed Android firebase functionality
 				<View style={styles.flowRight}>
 					<TouchableHighlight style={styles.button}
 							underlayColor='#99d9f4' onPress={ this.onListPortalPress.bind(this) }>

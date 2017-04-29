@@ -24,12 +24,7 @@ import {
 	Image,
 	TextInput,
 	ListView,
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
 	AlertIOS
-=======
-	AlertIOS,
-	Alert
->>>>>>> Fixed Android firebase functionality
 } from 'react-native';
 
 
@@ -62,10 +57,6 @@ class ProduceList extends Component {
 
 	componentDidMount() {
 		let Name = this.props.name;
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
-=======
-		//let itemName = this.state.itemName;
->>>>>>> Fixed Android firebase functionality
 		/*
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
@@ -73,14 +64,8 @@ class ProduceList extends Component {
 		*/
 		this.listenForItems(this.itemsRef);
 		this.setState({
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
 			name: Name
 		})
-=======
-			name: Name,
-			//itemName: itemName
-		});
->>>>>>> Fixed Android firebase functionality
   }
 
 	listenForItems(itemsRef) {
@@ -103,10 +88,6 @@ class ProduceList extends Component {
   }
 
 	_addItem() {
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
-=======
-		/*
->>>>>>> Fixed Android firebase functionality
     AlertIOS.prompt(
       'Add New Item',
       null,
@@ -120,25 +101,11 @@ class ProduceList extends Component {
       ],
       'plain-text'
     );
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
   }
 
 	_renderItem(item) {
 		const onPress = () => {
       AlertIOS.prompt(
-=======
-		*/
-		let itemName = this.state.itemName;
-		this.itemsRef.push({ title: itemName})
-		Alert.alert(itemName + ' has been added!');
-
-  }
-
-	_renderItem(item) {
-
-		const onPress = () => {
-      Alert.alert(
->>>>>>> Fixed Android firebase functionality
         'Complete',
         null,
         [
@@ -151,18 +118,6 @@ class ProduceList extends Component {
 		return (
       <ListItem item={item} onPress={onPress} />
     );
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
-=======
-		/*
-		let itemName = this.state.itemName;
-		this.itemsRef.child(item._key).remove();
-		Alert.alert(itemName + ' has been removed!');
-
-		return (
-			<ListItem item={item}  />
-		);
-		*/
->>>>>>> Fixed Android firebase functionality
 	}
 
 	onWalmartMainPress(event) {
@@ -176,15 +131,7 @@ class ProduceList extends Component {
 		//alert('Welcome ' + this.state.name + '!');
 	}
 
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
 
-=======
-	onItemTextChanged(event) {
-  	console.log('onItemTextChanged');
-  	this.setState({ itemName: event.nativeEvent.text });
-  	console.log(this.state.itemName);
-	}
->>>>>>> Fixed Android firebase functionality
 
 	//Change first <View back to {styles.container2}
 	render() {
@@ -194,24 +141,10 @@ class ProduceList extends Component {
 
 				<View style={styles.container}>
 					<Text style={styles.header}>Produce</Text>
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
-=======
-						<View style={styles.flowRight}>
-							<TextInput
-								style={styles.searchInput}
-								placeholder='Enter Item Name'
-								onChange={this.onItemTextChanged.bind(this)}
-								value={this.state.itemName}
-							/>
->>>>>>> Fixed Android firebase functionality
 						<TouchableHighlight style={styles.button}
 								underlayColor='#99d9f4' onPress={this._addItem.bind(this)}>
 							<Text style={styles.buttonText}>Add Item</Text>
 						</TouchableHighlight>
-<<<<<<< 0fba93b5d10533bf5b2b3a554b280ceaa123ef62
-=======
-						</View>
->>>>>>> Fixed Android firebase functionality
 						<TouchableHighlight style={styles.button1}
 								underlayColor='#99d9f4' onPress={this.onWalmartMainPress.bind(this)}>
 							<Text style={styles.buttonText}>Return to Walmart</Text>
