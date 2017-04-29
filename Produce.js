@@ -24,7 +24,8 @@ import {
 	Image,
 	TextInput,
 	ListView,
-	AlertIOS
+	AlertIOS,
+	Alert
 } from 'react-native';
 
 
@@ -88,7 +89,7 @@ class ProduceList extends Component {
   }
 
 	_addItem() {
-    AlertIOS.prompt(
+    Alert.alert(
       'Add New Item',
       null,
       [
@@ -105,7 +106,7 @@ class ProduceList extends Component {
 
 	_renderItem(item) {
 		const onPress = () => {
-      AlertIOS.prompt(
+      Alert.alert(
         'Complete',
         null,
         [
