@@ -35,38 +35,27 @@ class ProduceList extends Component {
 	constructor(props) {
   	super(props);
 
-		//FirebaseConfig.initialize();
-		/*
-		firebase.database().ref('Lists/Walmart/Dairy').update({
-			var name = 'Sour Cream';
-    	'Sour Cream': '',
-			name: 'Cheese',
-  	});
-		*/
-
 		this.state = {
     	dataSource: new ListView.DataSource({
       	rowHasChanged: (row1, row2) => row1 !== row2,
-				name: '',
-				id: 'Produce',
+			id: 'Produce'
     	})
+
   	};
-		//this.itemsRef = firebaseWalmart.database().ref();
 		let produceRef = 'Lists/Walmart/Produce';
 		this.itemsRef = firebase.database().ref(produceRef);
 	}
 
 	componentDidMount() {
 		let Name = this.props.name;
-		/*
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
-    })
-		*/
+		let itemName = this.props.itemName;
+
 		this.listenForItems(this.itemsRef);
 		this.setState({
-			name: Name
-		})
+
+			//itemName: itemName
+
+		});
   }
 
 	listenForItems(itemsRef) {
@@ -89,6 +78,7 @@ class ProduceList extends Component {
   }
 
 	_addItem() {
+		/*
     Alert.alert(
       'Add New Item',
       null,
@@ -102,9 +92,16 @@ class ProduceList extends Component {
       ],
       'plain-text'
     );
+		*/
+
+		let itemName = this.state.itemName;
+		this.itemsRef.push({ title: itemName });
+		Alert.alert(itemName + ' has been added!');
+		this.setState({itemName: ''});
   }
 
 	_renderItem(item) {
+		let itemName = this.state.itemName;
 		const onPress = () => {
       Alert.alert(
         'Complete',
@@ -132,7 +129,11 @@ class ProduceList extends Component {
 		//alert('Welcome ' + this.state.name + '!');
 	}
 
-
+	onItemTextChanged(event) {
+  	console.log('onNameTextChanged');
+  	this.setState({ itemName: event.nativeEvent.text });
+  	console.log(this.state.itemName);
+	}
 
 	//Change first <View back to {styles.container2}
 	render() {
@@ -142,10 +143,18 @@ class ProduceList extends Component {
 
 				<View style={styles.container}>
 					<Text style={styles.header}>Produce</Text>
+					<View style={styles.flowRight}>
+						<TextInput
+							style={styles.searchInput}
+							placeholder='Enter Item Name'
+							onChange={this.onItemTextChanged.bind(this)}
+							value={this.state.itemName}
+						/>
 						<TouchableHighlight style={styles.button}
 								underlayColor='#99d9f4' onPress={this._addItem.bind(this)}>
 							<Text style={styles.buttonText}>Add Item</Text>
 						</TouchableHighlight>
+					</View>
 						<TouchableHighlight style={styles.button1}
 								underlayColor='#99d9f4' onPress={this.onWalmartMainPress.bind(this)}>
 							<Text style={styles.buttonText}>Return to Walmart</Text>
@@ -157,6 +166,7 @@ class ProduceList extends Component {
           		dataSource={this.state.dataSource}
           		renderRow={this._renderItem.bind(this)}
           		enableEmptySections={true}
+							style={styles1.li}
           		/>
 					</View>
 
