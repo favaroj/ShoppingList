@@ -1,17 +1,15 @@
 'use strict';
 
 import * as firebase from 'firebase';
-const StatusBar = require('./components/StatusBar');
-const ActionButton = require('./components/ActionButton');
-const ListItem = require('./components/ListItem');
-const styles1 = require('./styles.js');
-var CreatePortal = require('./create_portal.ios');
-var MainMenu = require('./main_page.ios');
+
+const styles1 = require('./../styles.js');
+//var CreatePortal = require('./create_portal.ios');
+//var MainMenu = require('./main_page.ios');
 //var Produce = require('./Produce');
 //import {firebase} from './list_portal.ios';
 //var firebaseConfig = require('./firebase_config');
 
-import FirebaseConfig from './firebase_config';
+//import FirebaseConfig from './firebase_config';
 
 //destructuring assignment- call StyleSheet instead of ReactNative.StyleSheet
 import React, { Component } from 'react';
@@ -141,6 +139,26 @@ class WalmartList extends Component {
 		});
 	}
 
+	onDairyPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'Dairy',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
+	onMeatPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'Meat',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
 	//Change first <View back to {styles.container2}
 	render() {
 		console.log('CreatePortal.render');
@@ -159,6 +177,14 @@ class WalmartList extends Component {
 						<TouchableHighlight style={styles.button1}
 								underlayColor='#99d9f4' onPress={this.onProducePress.bind(this)}>
 							<Text style={styles.buttonText}>Produce</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button1}
+								underlayColor='#99d9f4' onPress={this.onDairyPress.bind(this)}>
+							<Text style={styles.buttonText}>Dairy</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button1}
+								underlayColor='#99d9f4' onPress={this.onMeatPress.bind(this)}>
+							<Text style={styles.buttonText}>Meat</Text>
 						</TouchableHighlight>
 					</View>
 
@@ -181,7 +207,7 @@ var styles = StyleSheet.create({
 	header: {
 		marginTop: 5,
 		marginBottom: 20,
-		fontSize: 30,
+		fontSize: 40,
 		textAlign: 'center',
 		color: '#48BBEC'
 	},
@@ -212,7 +238,7 @@ var styles = StyleSheet.create({
   	alignSelf: 'stretch'
 	},
 	buttonText: {
-  	fontSize: 20,
+  	fontSize: 30,
   	color: 'white',
   	alignSelf: 'center'
 	},
@@ -235,8 +261,8 @@ var styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	button1: {
-  	height: 25,
-		width: 200,
+  	height: 40,
+		width: 265,
 
   	flexDirection: 'row',
   	backgroundColor: '#48BBEC',

@@ -1,16 +1,10 @@
 'use strict';
 
 import * as firebase from 'firebase';
-const StatusBar = require('./components/StatusBar');
-const ActionButton = require('./components/ActionButton');
-const ListItem = require('./components/ListItem');
-const styles1 = require('./styles.js');
-var CreatePortal = require('./create_portal.ios');
-var MainMenu = require('./main_page.ios');
-var Produce = require('./Produce');
-var WalmartList = require('./WalmartList');
+import FirebaseConfig from './../firebase_config';
+const ListItem = require('./../components/ListItem');
+const styles1 = require('./../styles.js');
 
-import FirebaseConfig from './firebase_config';
 
 //destructuring assignment- e.g. call StyleSheet instead of ReactNative.StyleSheet
 import React, { Component } from 'react';
@@ -29,8 +23,7 @@ import {
 } from 'react-native';
 
 
-
-class ProduceList extends Component {
+class DairyList extends Component {
 
 	constructor(props) {
   	super(props);
@@ -38,12 +31,12 @@ class ProduceList extends Component {
 		this.state = {
     	dataSource: new ListView.DataSource({
       	rowHasChanged: (row1, row2) => row1 !== row2,
-			id: 'Produce'
+			id: 'Dairy'
     	})
 
   	};
-		let produceRef = 'Lists/Walmart/Produce';
-		this.itemsRef = firebase.database().ref(produceRef);
+		let dairyRef = 'Lists/Walmart/Dairy';
+		this.itemsRef = firebase.database().ref(dairyRef);
 	}
 
 	componentDidMount() {
@@ -69,7 +62,6 @@ class ProduceList extends Component {
           _key: child.key
         });
       });
-
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(items)
       });
@@ -78,22 +70,6 @@ class ProduceList extends Component {
   }
 
 	_addItem() {
-		/*
-    Alert.alert(
-      'Add New Item',
-      null,
-      [
-        {
-          text: 'Add',
-          onPress: (text) => {
-            this.itemsRef.push({ title: text })
-          }
-        },
-      ],
-      'plain-text'
-    );
-		*/
-
 		let itemName = this.state.itemName;
 		this.itemsRef.push({ title: itemName });
 		Alert.alert(itemName + ' has been added!');
@@ -135,14 +111,12 @@ class ProduceList extends Component {
   	console.log(this.state.itemName);
 	}
 
-	//Change first <View back to {styles.container2}
 	render() {
 		console.log('CreatePortal.render');
 		return (
 			<View style={styles1.container}>
-
 				<View style={styles.container}>
-					<Text style={styles.header}>Produce</Text>
+					<Text style={styles.header}>Dairy</Text>
 					<View style={styles.flowRight}>
 						<TextInput
 							style={styles.searchInput}
@@ -169,13 +143,10 @@ class ProduceList extends Component {
 							style={styles1.li}
           		/>
 					</View>
-
 				</View>
 		</View>
 		)
 	}
-	//<ActionButton title="Add" onPress={this._addItem.bind(this)} />
-	//
 }
 
 var styles = StyleSheet.create({
@@ -189,7 +160,7 @@ var styles = StyleSheet.create({
 	header: {
 		marginTop: 5,
 		marginBottom: 20,
-		fontSize: 30,
+		fontSize: 40,
 		textAlign: 'center',
 		color: '#48BBEC'
 	},
@@ -271,4 +242,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = ProduceList;
+module.exports = DairyList;

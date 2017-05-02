@@ -1,11 +1,12 @@
 'use strict';
 
-const styles1 = require('./styles.js');
-var CreatePortal = require('./create_portal.ios');
-var MainMenu = require('./main_page.ios');
-//var WalmartList = require('./WalmartList');
+import * as firebase from 'firebase';
+import FirebaseConfig from './../firebase_config';
+const ListItem = require('./../components/ListItem');
+const styles1 = require('./../styles.js');
 
-//destructuring assignment- call StyleSheet instead of ReactNative.StyleSheet
+
+//destructuring assignment- e.g. call StyleSheet instead of ReactNative.StyleSheet
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -17,65 +18,39 @@ import {
 	Image,
 	TextInput,
 	ListView,
-	AlertIOS
+	AlertIOS,
+	Alert
 } from 'react-native';
 
-var firebase = require('firebase');
-/*
-const firebaseConfig = {
-	apiKey: "AIzaSyAGwqziE1aB7oxkAeGAT8EIxRUol6O_fO0",
-  authDomain: "shoppinglist-c4690.firebaseapp.com",
-  databaseURL: "https://shoppinglist-c4690.firebaseio.com",
-  projectId: "shoppinglist-c4690",
-  storageBucket: "shoppinglist-c4690.appspot.com",
-  messagingSenderId: "665003354084"
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-//Get Reference to database
-var rootRef = firebase.database();
-*/
-
-
-class ListPortal extends Component {
+class MeatList extends Component {
 
 	constructor(props) {
   	super(props);
 
-		/*
-		firebase.database().ref('Lists/Walmart/Dairy').update({
-			var name = 'Sour Cream';
-    	'Sour Cream': '',
-			name: 'Cheese',
-  	});
-		*/
-
 		this.state = {
-    	//dataSource: new ListView.DataSource({
-      	//rowHasChanged: (row1, row2) => row1 !== row2,
-				name: '',
-				id: 'ListPortal',
-				date: '',
-				time: ''
-    	//})
+    	dataSource: new ListView.DataSource({
+      	rowHasChanged: (row1, row2) => row1 !== row2,
+			id: 'Meat'
+    	})
+
   	};
-		//this.itemsRef = firebaseApp.database().ref();
-		//this.itemsRef = firebaseApp.database().ref('Lists/Walmart/Dairy');
+		let meatRef = 'Lists/Walmart/Meat';
+		this.itemsRef = firebase.database().ref(meatRef);
 	}
 
 	componentDidMount() {
 		let Name = this.props.name;
-		/*
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
-    })
-		*/
-		//this.listenForItems(this.itemsRef);
+		let itemName = this.props.itemName;
+
+		this.listenForItems(this.itemsRef);
 		this.setState({
-			name: Name
-		})
+
+			//itemName: itemName
+
+		});
   }
-	/*
+
 	listenForItems(itemsRef) {
     itemsRef.on('value', (snap) => {
 
@@ -87,7 +62,6 @@ class ListPortal extends Component {
           _key: child.key
         });
       });
-
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(items)
       });
@@ -96,24 +70,16 @@ class ListPortal extends Component {
   }
 
 	_addItem() {
-    AlertIOS.prompt(
-      'Create New List',
-      null,
-      [
-        {
-          text: 'Add',
-          onPress: (text) => {
-            this.itemsRef.push({ title: text })
-          }
-        },
-      ],
-      'plain-text'
-    );
+		let itemName = this.state.itemName;
+		this.itemsRef.push({ title: itemName });
+		Alert.alert(itemName + ' has been added!');
+		this.setState({itemName: ''});
   }
 
 	_renderItem(item) {
+		let itemName = this.state.itemName;
 		const onPress = () => {
-      AlertIOS.prompt(
+      Alert.alert(
         'Complete',
         null,
         [
@@ -127,8 +93,8 @@ class ListPortal extends Component {
       <ListItem item={item} onPress={onPress} />
     );
 	}
-	*/
-	onWalmartPress(event) {
+
+	onWalmartMainPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
 			id: 'WalmartList',
@@ -136,54 +102,51 @@ class ListPortal extends Component {
 				name: name
 			}
 		});
-	}
-
-	onMainMenuPress(event) {
-		let name = this.state.name;
-		this.props.navigator.push({
-			id: 'Main',
-			passProps: {
-				name: name
-			}
-		});
 		//alert('Welcome ' + this.state.name + '!');
 	}
 
-	getDate(event) {
-		var date = new Date();
-		var n = date.toDateString();
-		var time = date.toLocaleTimeString();
-		this.setState({
-			date: n,
-			time: time
-		})
-		console.log(n + ' ' + time);
-		Alert.alert(n + ' ' + time);
+	onItemTextChanged(event) {
+  	console.log('onNameTextChanged');
+  	this.setState({ itemName: event.nativeEvent.text });
+  	console.log(this.state.itemName);
 	}
-	//Change first <View back to {styles.container2}
+
 	render() {
 		console.log('CreatePortal.render');
 		return (
 			<View style={styles1.container}>
-
 				<View style={styles.container}>
-					<Text style={styles.header}>{this.props.name}'s Portal</Text>
-					<Text style={styles.header}>{this.state.date}</Text>
-				</View>
-				<View>
-					<View style={styles.container1}>
+					<Text style={styles.header}>Meat</Text>
+					<View style={styles.flowRight}>
+						<TextInput
+							style={styles.searchInput}
+							placeholder='Enter Item Name'
+							onChange={this.onItemTextChanged.bind(this)}
+							value={this.state.itemName}
+						/>
 						<TouchableHighlight style={styles.button}
-								underlayColor='#99d9f4' onPress={this.onWalmartPress.bind(this)}>
-							<Text style={styles.buttonText}>Walmart</Text>
+								underlayColor='#99d9f4' onPress={this._addItem.bind(this)}>
+							<Text style={styles.buttonText}>Add Item</Text>
 						</TouchableHighlight>
 					</View>
-
+						<TouchableHighlight style={styles.button1}
+								underlayColor='#99d9f4' onPress={this.onWalmartMainPress.bind(this)}>
+							<Text style={styles.buttonText}>Return to Walmart</Text>
+						</TouchableHighlight>
+				</View>
+				<View>
+					<View>
+						<ListView
+          		dataSource={this.state.dataSource}
+          		renderRow={this._renderItem.bind(this)}
+          		enableEmptySections={true}
+							style={styles1.li}
+          		/>
+					</View>
 				</View>
 		</View>
 		)
 	}
-	//<ActionButton title="Add" onPress={this._addItem.bind(this)} />
-//
 }
 
 var styles = StyleSheet.create({
@@ -228,13 +191,26 @@ var styles = StyleSheet.create({
   	alignSelf: 'stretch'
 	},
 	buttonText: {
-  	fontSize: 30,
+  	fontSize: 12,
   	color: 'white',
   	alignSelf: 'center'
 	},
 	button: {
-  	height: 35,
-		width: 265,
+  	height: 25,
+		width: 80,
+
+  	flexDirection: 'row',
+  	backgroundColor: '#48BBEC',
+  	borderColor: '#48BBEC',
+  	borderWidth: 1,
+  	borderRadius: 8,
+  	marginBottom: 1,
+		marginTop: 10,
+		justifyContent: 'center'
+	},
+	button1: {
+  	height: 25,
+		width: 200,
 
   	flexDirection: 'row',
   	backgroundColor: '#48BBEC',
@@ -266,5 +242,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = ListPortal;
-export {firebase};
+module.exports = MeatList;

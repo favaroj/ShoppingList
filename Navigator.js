@@ -10,8 +10,15 @@ import
 var Main = require('./main_page.ios');
 var CreatePortal = require('./create_portal.ios');
 var ListPortal = require('./list_portal.ios');
-var WalmartList = require('./WalmartList');
-var Produce = require('./Produce');
+var WalmartList = require('./Walmart/WalmartList');
+var Produce = require('./Walmart/Produce');
+var Dairy = require('./Walmart/Dairy');
+var Canned = require('./Walmart/Canned');
+var Meat = require('./Walmart/Meat');
+var MiscFood = require('./Walmart/MiscFood');
+var NonFood = require('./Walmart/NonFood');
+var Other = require('./Walmart/Other');
+
 
 class AppNavigator extends React.Component{
   constructor(props) {
@@ -40,6 +47,18 @@ class AppNavigator extends React.Component{
 				return (<WalmartList navigator={navigator} {...route.passProps} route={route} title="Walmart List"/>);
 			case 'Produce':
 				return (<Produce navigator={navigator} {...route.passProps} route={route} title='Produce'/>);
+			case 'Dairy':
+				return (<Dairy navigator={navigator} {...route.passProps} route={route} title='Dairy'/>);
+			case 'Canned':
+				return (<Canned navigator={navigator} {...route.passProps} route={route} title='Canned'/>);
+			case 'Meat':
+				return (<Meat navigator={navigator} {...route.passProps} route={route} title='Meat'/>);
+			case 'MiscFood':
+				return (<MiscFood navigator={navigator} {...route.passProps} route={route} title='MiscFood'/>);
+			case 'NonFood':
+				return (<NonFood navigator={navigator} {...route.passProps} route={route} title='NonFood'/>);
+			case 'Other':
+				return (<Other navigator={navigator} {...route.passProps} route={route} title='Other'/>);
 		}
   }
 }
