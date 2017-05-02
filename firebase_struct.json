@@ -5,20 +5,26 @@
 				"Item": "Milk"
 			},
 			"Produce": {
-				"Lettuce": "1"
+				"Item": "Lettuce"
 			},
 			"Meat": {
-				"Steak": "1"
+				"Item": "Steak"
 			},
 			"Misc Food": {
-				"Granola": "1"
+				"Item": "Granola"
 			},
 			"Non Food": {
-				"Batteries": "1"
+				"Item": "Batteries"
 			},
 			"Canned": {
-				"Corn": "1"
+				"Item": "Beans"
 			}
-    }
+    },
+		"Amazon": {
+			"Item": "Supplements"
+		},
+		"Ross": {
+			"Item": "Foot Stool"
+		}
   }
 }

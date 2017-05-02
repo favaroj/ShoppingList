@@ -18,7 +18,8 @@ var Meat = require('./Walmart/Meat');
 var MiscFood = require('./Walmart/MiscFood');
 var NonFood = require('./Walmart/NonFood');
 var Other = require('./Walmart/Other');
-
+var Amazon = require('./AmazonList');
+var Ross = require('./RossList');
 
 class AppNavigator extends React.Component{
   constructor(props) {
@@ -59,6 +60,10 @@ class AppNavigator extends React.Component{
 				return (<NonFood navigator={navigator} {...route.passProps} route={route} title='NonFood'/>);
 			case 'Other':
 				return (<Other navigator={navigator} {...route.passProps} route={route} title='Other'/>);
+			case 'Amazon':
+				return (<Amazon navigator={navigator} {...route.passProps} route={route} title='Amazon'/>);
+			case 'Ross':
+				return (<Ross navigator={navigator} {...route.passProps} route={route} title='Ross'/>);
 		}
   }
 }

@@ -1,8 +1,8 @@
 'use strict';
 
 const styles1 = require('./styles.js');
-var CreatePortal = require('./create_portal.ios');
-var MainMenu = require('./main_page.ios');
+//var CreatePortal = require('./create_portal.ios');
+//var MainMenu = require('./main_page.ios');
 //var WalmartList = require('./WalmartList');
 
 //destructuring assignment- call StyleSheet instead of ReactNative.StyleSheet
@@ -138,6 +138,26 @@ class ListPortal extends Component {
 		});
 	}
 
+	onAmazonPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'Amazon',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
+	onRossPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'Ross',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
 	onMainMenuPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
@@ -175,6 +195,14 @@ class ListPortal extends Component {
 						<TouchableHighlight style={styles.button}
 								underlayColor='#99d9f4' onPress={this.onWalmartPress.bind(this)}>
 							<Text style={styles.buttonText}>Walmart</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button}
+								underlayColor='#99d9f4' onPress={this.onAmazonPress.bind(this)}>
+							<Text style={styles.buttonText}>Amazon</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button}
+								underlayColor='#99d9f4' onPress={this.onRossPress.bind(this)}>
+							<Text style={styles.buttonText}>Ross</Text>
 						</TouchableHighlight>
 					</View>
 

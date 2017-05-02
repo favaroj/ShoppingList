@@ -1,9 +1,9 @@
 'use strict';
 
 import * as firebase from 'firebase';
-import FirebaseConfig from './../firebase_config';
-const ListItem = require('./../components/ListItem');
-const styles1 = require('./../styles.js');
+import FirebaseConfig from './firebase_config';
+const ListItem = require('./components/ListItem');
+const styles1 = require('./styles.js');
 
 
 //destructuring assignment- e.g. call StyleSheet instead of ReactNative.StyleSheet
@@ -23,7 +23,7 @@ import {
 } from 'react-native';
 
 
-class CannedList extends Component {
+class AmazonList extends Component {
 
 	constructor(props) {
   	super(props);
@@ -31,12 +31,12 @@ class CannedList extends Component {
 		this.state = {
     	dataSource: new ListView.DataSource({
       	rowHasChanged: (row1, row2) => row1 !== row2,
-			id: 'Canned'
+			id: 'Amazon'
     	})
 
   	};
-		let cannedRef = 'Lists/Walmart/Canned';
-		this.itemsRef = firebase.database().ref(cannedRef);
+		let amazonRef = 'Lists/Amazon';
+		this.itemsRef = firebase.database().ref(amazonRef);
 	}
 
 	componentDidMount() {
@@ -94,10 +94,10 @@ class CannedList extends Component {
     );
 	}
 
-	onWalmartMainPress(event) {
+	onListPortalPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
-			id: 'WalmartList',
+			id: 'ListPortal',
 			passProps: {
 				name: name
 			}
@@ -116,7 +116,7 @@ class CannedList extends Component {
 		return (
 			<View style={styles1.container}>
 				<View style={styles.container}>
-					<Text style={styles.header}>Canned</Text>
+					<Text style={styles.header}>Amazon</Text>
 					<View style={styles.flowRight}>
 						<TextInput
 							style={styles.searchInput}
@@ -130,8 +130,8 @@ class CannedList extends Component {
 						</TouchableHighlight>
 					</View>
 						<TouchableHighlight style={styles.button1}
-								underlayColor='#99d9f4' onPress={this.onWalmartMainPress.bind(this)}>
-							<Text style={styles.buttonText}>Return to Walmart</Text>
+								underlayColor='#99d9f4' onPress={this.onListPortalPress.bind(this)}>
+							<Text style={styles.buttonText}>Return to Portal</Text>
 						</TouchableHighlight>
 				</View>
 				<View>
@@ -242,4 +242,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = CannedList;
+module.exports = AmazonList;

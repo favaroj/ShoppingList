@@ -33,16 +33,12 @@ class MainPage extends Component {
 	}
 
 	onListPortalPress(event) {
-
-
-
 		this.props.navigator.push({
 			id: 'ListPortal',
 			passProps: {
 				name: this.state.name
 			}
 		});
-
 		//alert('Welcome ' + this.state.name + '!');
 	}
 
@@ -63,7 +59,6 @@ class MainPage extends Component {
 		return (
 			<View style={styles.container}>
 				<Image source={require('./Resources/shoppingCart-image.png')} style={styles.image}/>
-				<Text>{this.props.name}'s Portal</Text>
 				<View style={styles.flowRight}>
 					<TouchableHighlight style={styles.button}
 							underlayColor='#99d9f4' onPress={ this.onListPortalPress.bind(this) }>

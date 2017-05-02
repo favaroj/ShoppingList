@@ -159,12 +159,41 @@ class WalmartList extends Component {
 		});
 	}
 
+	onMiscFoodPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'MiscFood',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
+	onNonFoodPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'NonFood',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
+	onCannedPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'Canned',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
 	//Change first <View back to {styles.container2}
 	render() {
 		console.log('CreatePortal.render');
 		return (
 			<View style={styles1.container}>
-
 				<View style={styles.container}>
 					<Text style={styles.header}>Walmart</Text>
 						<TouchableHighlight style={styles.button}
@@ -185,6 +214,18 @@ class WalmartList extends Component {
 						<TouchableHighlight style={styles.button1}
 								underlayColor='#99d9f4' onPress={this.onMeatPress.bind(this)}>
 							<Text style={styles.buttonText}>Meat</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button1}
+								underlayColor='#99d9f4' onPress={this.onMiscFoodPress.bind(this)}>
+							<Text style={styles.buttonText}>Misc. Food</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button1}
+								underlayColor='#99d9f4' onPress={this.onNonFoodPress.bind(this)}>
+							<Text style={styles.buttonText}>Non-Food</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.button1}
+								underlayColor='#99d9f4' onPress={this.onCannedPress.bind(this)}>
+							<Text style={styles.buttonText}>Canned</Text>
 						</TouchableHighlight>
 					</View>
 
