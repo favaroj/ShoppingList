@@ -1,30 +1,82 @@
 {
-  "Lists": {
-    "Walmart": {
-      "Dairy": {
-				"Item": "Milk"
-			},
-			"Produce": {
-				"Item": "Lettuce"
-			},
-			"Meat": {
-				"Item": "Steak"
-			},
-			"Misc Food": {
-				"Item": "Granola"
-			},
-			"Non Food": {
-				"Item": "Batteries"
-			},
-			"Canned": {
-				"Item": "Beans"
-			}
+  "Lists" : {
+    "Amazon" : {
+      "-Kj9X1J_BjvPYruNaHVL" : {
+        "title" : "pills"
+      }
     },
-		"Amazon": {
-			"Item": "Supplements"
+		"Costco" : {
+			"title" : "paper towels"
 		},
-		"Ross": {
-			"Item": "Foot Stool"
-		}
+    "Ross" : {
+      "-Kj9Xbzzyr1YHJIFl-Wj" : {
+        "title" : "clothes"
+      },
+      "-Kj9zIhFINZfXM3kbRU8" : {
+        "title" : "tongs"
+      }
+    },
+    "Walmart" : {
+      "Canned" : {
+        "-KjA-2bZGgJ4Gso9ji85" : {
+          "title" : "beans"
+        },
+        "-KjA-3tKGAqQ4Wmr7tEq" : {
+          "title" : "corn"
+        },
+        "-KjAIS5XvPhl4zq4rV7L" : {
+          "title" : "fruit"
+        }
+      },
+      "Dairy" : {
+        "-Kj9zh6UJAeNWlRorskT" : {
+          "title" : "milk"
+        },
+        "-KjAI5sTOLdmtHWDfH9c" : {
+          "title" : "almond milk"
+        },
+        "-KjAIAYfBoaBU0pSl1mv" : {
+          "title" : "yogurt butter"
+        }
+      },
+      "Meat" : {
+        "-Kj9zlgis6mlNj20qxHa" : {
+          "title" : "steak"
+        },
+        "-KjAHpgtND0Fv31Jyu54" : {
+          "title" : "chicken"
+        },
+        "-KjAHv9KCAmKr2hHmwY1" : {
+          "title" : "deli meat"
+        }
+      },
+      "Misc Food" : {
+        "-KjA97bhggsc8bd4LRAm" : {
+          "title" : "salt"
+        },
+        "-KjAHZqo_yXCqgJhNRU_" : {
+          "title" : "tortillas"
+        },
+        "-KjAMjQXFBJyouYoboKQ" : {
+          "title" : "curry powder"
+        }
+      },
+      "Non Food" : {
+        "-Kj9zuBoth3ZVv8HOLkV" : {
+          "title" : "batteries"
+        },
+        "-Kj9zxEaR4iHGocq5PFR" : {
+          "title" : "paper"
+        }
+      },
+      "Produce" : {
+        "-Kj9zRzWnEltbRrrYJmw" : {
+          "title" : "Lettuce "
+        },
+        "-KjAKB3xRquUvGFouwch" : {
+          "title" : "potatoes"
+        }
+      }
+    }
   }
 }

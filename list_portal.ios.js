@@ -1,9 +1,6 @@
 'use strict';
 
 const styles1 = require('./styles.js');
-//var CreatePortal = require('./create_portal.ios');
-//var MainMenu = require('./main_page.ios');
-//var WalmartList = require('./WalmartList');
 
 //destructuring assignment- call StyleSheet instead of ReactNative.StyleSheet
 import React, { Component } from 'react';
@@ -17,117 +14,34 @@ import {
 	Image,
 	TextInput,
 	ListView,
-	AlertIOS
+	AlertIOS,
+	Alert
 } from 'react-native';
 
 var firebase = require('firebase');
-/*
-const firebaseConfig = {
-	apiKey: "AIzaSyAGwqziE1aB7oxkAeGAT8EIxRUol6O_fO0",
-  authDomain: "shoppinglist-c4690.firebaseapp.com",
-  databaseURL: "https://shoppinglist-c4690.firebaseio.com",
-  projectId: "shoppinglist-c4690",
-  storageBucket: "shoppinglist-c4690.appspot.com",
-  messagingSenderId: "665003354084"
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-//Get Reference to database
-var rootRef = firebase.database();
-*/
 
 
 class ListPortal extends Component {
 
 	constructor(props) {
   	super(props);
-
-		/*
-		firebase.database().ref('Lists/Walmart/Dairy').update({
-			var name = 'Sour Cream';
-    	'Sour Cream': '',
-			name: 'Cheese',
-  	});
-		*/
-
+		this.getDate = this.getDate.bind(this);
 		this.state = {
-    	//dataSource: new ListView.DataSource({
-      	//rowHasChanged: (row1, row2) => row1 !== row2,
 				name: '',
 				id: 'ListPortal',
-				date: '',
-				time: ''
-    	//})
+				date: ''
   	};
-		//this.itemsRef = firebaseApp.database().ref();
-		//this.itemsRef = firebaseApp.database().ref('Lists/Walmart/Dairy');
 	}
 
 	componentDidMount() {
 		let Name = this.props.name;
-		/*
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
-    })
-		*/
-		//this.listenForItems(this.itemsRef);
+		let currDate = this.getDate.bind(this);
 		this.setState({
-			name: Name
-		})
-  }
-	/*
-	listenForItems(itemsRef) {
-    itemsRef.on('value', (snap) => {
-
-      // get children as an array
-      var items = [];
-      snap.forEach((child) => {
-        items.push({
-          title: child.val().title,
-          _key: child.key
-        });
-      });
-
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(items)
-      });
-
-    });
+			name: Name,
+			date: currDate,
+		});
   }
 
-	_addItem() {
-    AlertIOS.prompt(
-      'Create New List',
-      null,
-      [
-        {
-          text: 'Add',
-          onPress: (text) => {
-            this.itemsRef.push({ title: text })
-          }
-        },
-      ],
-      'plain-text'
-    );
-  }
-
-	_renderItem(item) {
-		const onPress = () => {
-      AlertIOS.prompt(
-        'Complete',
-        null,
-        [
-          {text: 'Complete', onPress: (text) => this.itemsRef.child(item._key).remove()},
-          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
-        ],
-        'default'
-      );
-    };
-		return (
-      <ListItem item={item} onPress={onPress} />
-    );
-	}
-	*/
 	onWalmartPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
@@ -158,6 +72,16 @@ class ListPortal extends Component {
 		});
 	}
 
+	onCostcoPress(event) {
+		let name = this.state.name;
+		this.props.navigator.push({
+			id: 'Costco',
+			passProps: {
+				name: name
+			}
+		});
+	}
+
 	onMainMenuPress(event) {
 		let name = this.state.name;
 		this.props.navigator.push({
@@ -169,26 +93,28 @@ class ListPortal extends Component {
 		//alert('Welcome ' + this.state.name + '!');
 	}
 
-	getDate(event) {
-		var date = new Date();
-		var n = date.toDateString();
-		var time = date.toLocaleTimeString();
-		this.setState({
-			date: n,
-			time: time
-		})
-		console.log(n + ' ' + time);
-		Alert.alert(n + ' ' + time);
+	getDate() {
+		var Date = new Date().toDateString();
+		//var n = date.toDateString();
+		//var time = date.toLocaleTimeString();
+		this.setState ({
+			date: Date
+		});
+		console.log(Date + ' ');
+		Alert.alert(Date + ' ');
 	}
 	//Change first <View back to {styles.container2}
 	render() {
 		console.log('CreatePortal.render');
+		var date = new Date();
+
+		//Alert.alert(" " + date);
 		return (
 			<View style={styles1.container}>
 
 				<View style={styles.container}>
-					<Text style={styles.header}>{this.props.name}'s Portal</Text>
-					<Text style={styles.header}>{this.state.date}</Text>
+					<Text style={styles.header}>List Portal</Text>
+					<Text style={styles.header}>{this.getDate.bind(this)}</Text>
 				</View>
 				<View>
 					<View style={styles.container1}>
@@ -204,8 +130,11 @@ class ListPortal extends Component {
 								underlayColor='#99d9f4' onPress={this.onRossPress.bind(this)}>
 							<Text style={styles.buttonText}>Ross</Text>
 						</TouchableHighlight>
+						<TouchableHighlight style={styles.button}
+								underlayColor='#99d9f4' onPress={this.onCostcoPress.bind(this)}>
+							<Text style={styles.buttonText}>Costco</Text>
+						</TouchableHighlight>
 					</View>
-
 				</View>
 		</View>
 		)

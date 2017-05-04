@@ -16,3 +16,37 @@ class FirebaseConfig {
 	}
 }
 module.exports = FirebaseConfig;
+
+//firebase_struct.json in case of failure
+/*
+{
+  "Lists": {
+    "Walmart": {
+      "Dairy": {
+				"Item": "Milk"
+			},
+			"Produce": {
+				"Item": "Lettuce"
+			},
+			"Meat": {
+				"Item": "Steak"
+			},
+			"Misc Food": {
+				"Item": "Granola"
+			},
+			"Non Food": {
+				"Item": "Batteries"
+			},
+			"Canned": {
+				"Item": "Beans"
+			}
+    },
+		"Amazon": {
+			"Item": "Supplements"
+		},
+		"Ross": {
+			"Item": "Foot Stool"
+		}
+  }
+}
+*/

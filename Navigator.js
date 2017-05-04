@@ -20,6 +20,7 @@ var NonFood = require('./Walmart/NonFood');
 var Other = require('./Walmart/Other');
 var Amazon = require('./AmazonList');
 var Ross = require('./RossList');
+var Costco = require('./Costco');
 
 class AppNavigator extends React.Component{
   constructor(props) {
@@ -27,7 +28,7 @@ class AppNavigator extends React.Component{
   }
 
   render() {
-    var initialRouteID = 'Main';
+    var initialRouteID = 'ListPortal';
     return (
       <Navigator
         style={{flex:1}}
@@ -64,6 +65,8 @@ class AppNavigator extends React.Component{
 				return (<Amazon navigator={navigator} {...route.passProps} route={route} title='Amazon'/>);
 			case 'Ross':
 				return (<Ross navigator={navigator} {...route.passProps} route={route} title='Ross'/>);
+			case 'Costco':
+				return (<Costco navigator={navigator} {...route.passProps} route={route} title='Costco'/>);
 		}
   }
 }
