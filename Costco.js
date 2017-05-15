@@ -19,7 +19,8 @@ import {
 	TextInput,
 	ListView,
 	AlertIOS,
-	Alert
+	Alert,
+	ScrollView
 } from 'react-native';
 
 
@@ -133,16 +134,14 @@ class CostcoList extends Component {
 							<Text style={styles.buttonText}>Return to Portal</Text>
 						</TouchableHighlight>
 				</View>
-				<View>
-					<View>
-						<ListView
-          		dataSource={this.state.dataSource}
-          		renderRow={this._renderItem.bind(this)}
-          		enableEmptySections={true}
-							style={styles1.li}
-          		/>
-					</View>
-				</View>
+				<ScrollView>
+					<ListView
+          	dataSource={this.state.dataSource}
+          	renderRow={this._renderItem.bind(this)}
+          	enableEmptySections={true}
+						style={styles1.li}
+          />
+				</ScrollView>
 		</View>
 		)
 	}
